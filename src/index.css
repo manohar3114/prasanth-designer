@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Bodoni Moda", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Inter", sans-serif;
+  
+  --color-luxury-gold: #f1bb99;
+  --color-luxury-cream: #eae1dc;
+  --color-luxury-black: #171310;
+  --color-luxury-ink: #110d0b;
+  --color-luxury-charcoal: #231f1c;
+  --color-luxury-taupe: #9d8e85;
+}
+
+body {
+  @apply bg-luxury-black text-luxury-cream font-sans antialiased;
+  background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+  background-size: 200px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif font-light;
+}
+
+.luxury-button {
+  @apply px-8 py-4 bg-luxury-gold text-luxury-black rounded-none hover:bg-luxury-gold/90 transition-all duration-300 font-sans text-xs font-bold uppercase tracking-widest text-center disabled:opacity-50;
+}
+
+.luxury-button-outline {
+  @apply px-8 py-4 bg-transparent text-luxury-gold rounded-none border border-luxury-gold hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 font-sans text-xs font-bold uppercase tracking-widest text-center disabled:opacity-50;
+}
+
+.luxury-input {
+  @apply w-full bg-luxury-charcoal border-b border-luxury-taupe/30 px-4 py-3 focus:border-luxury-gold outline-none transition-colors font-sans text-luxury-cream placeholder:text-luxury-taupe/50;
+}
+
+.luxury-card {
+  @apply bg-luxury-charcoal border border-luxury-taupe/10 p-8 transition-all hover:border-luxury-taupe/30;
+}
+
+.font-label {
+  @apply font-sans text-[10px] uppercase tracking-[0.3em] font-semibold;
+}
