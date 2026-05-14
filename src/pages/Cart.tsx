@@ -133,10 +133,10 @@ export const Cart: React.FC = () => {
 
             <div className="space-y-6">
               <button 
-                onClick={() => navigate('/custom-order')}
+                onClick={() => navigate('/checkout')}
                 className="luxury-button w-full py-6"
               >
-                Proceed to Secure Order
+                Proceed to Checkout
               </button>
               <p className="text-center font-sans text-[10px] text-luxury-taupe uppercase tracking-widest leading-relaxed">
                 Prices include VAT where applicable. Custom pieces are non-refundable once tailoring commences.

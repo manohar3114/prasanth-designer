@@ -15,6 +15,8 @@ import { Measurements } from './pages/Measurements';
 import { Contact } from './pages/Contact';
 import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
+import { Checkout } from './pages/Checkout';
+import { Wishlist } from './pages/Wishlist';
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/wishlist" element={<Wishlist />} />
             </Routes>
             <Footer />
           </div>

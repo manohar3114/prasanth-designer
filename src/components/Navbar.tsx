@@ -1,14 +1,16 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, User as UserIcon, ShoppingBag, Calendar, Ruler, MessageSquare } from 'lucide-react';
+import { Menu, X, User as UserIcon, ShoppingBag, Calendar, Ruler, MessageSquare, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../hooks/useCart';
 import { useAuth } from '../hooks/useAuth';
+import { useWishlist } from '../hooks/useWishlist';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { items } = useCart();
   const { user } = useAuth();
+  const { items: wishlistItems } = useWishlist();
 
   const navLinks = [
     { name: 'Collections', href: '/collections' },
@@ -44,6 +46,14 @@ export const Navbar: React.FC = () => {
             ))}
             
             <div className="flex items-center space-x-6 pl-6 border-l border-luxury-taupe/20">
+              <Link to="/wishlist" className="relative text-luxury-cream/60 hover:text-luxury-gold transition-colors">
+                <Heart size={18} strokeWidth={1.5} />
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-luxury-gold text-luxury-black text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </Link>
               <Link to="/cart" className="relative text-luxury-cream/60 hover:text-luxury-gold transition-colors">
                 <ShoppingBag size={18} strokeWidth={1.5} />
                 {items.length > 0 && (
@@ -61,6 +71,14 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-6">
+            <Link to="/wishlist" className="relative text-luxury-cream/60 hover:text-luxury-gold transition-colors">
+              <Heart size={18} strokeWidth={1.5} />
+              {wishlistItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-luxury-gold text-luxury-black text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {wishlistItems.length}
+                </span>
+              )}
+            </Link>
             <Link to="/cart" className="relative text-luxury-cream/60">
               <ShoppingBag size={20} strokeWidth={1.5} />
               {items.length > 0 && (
