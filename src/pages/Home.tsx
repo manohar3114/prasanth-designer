@@ -62,9 +62,8 @@ export const Home: React.FC = () => {
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSVOYxPzt_yS5-vDRss2OFa5TjacBcc6OQg0R6nAoKJJWo4WG9eick56ccmHSP32laCsHoYduH_mQSs2rE9T9v9YwD-6dP4UczXZCY4shg3POf2GqAgWbCtX5NzuILHOK-WN35-Aq_bHcKP1WIXrbwLOreJ9o9-PfqDhvlUxnKazcf8Q-qO6rMT6Lf7xXWBty271G5h-b5avbmLggJoCU6p85HSB-aAHC-yPaKJbC1HWrRt2pDTVWi4n2LkVNl246ErqEAU3Rbsso"
             alt="Luxury Tailoring"
-            className="w-full h-full object-cover opacity-30 filter grayscale"
+            className="w-full h-full object-cover filter brightness-50"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-luxury-black via-luxury-black/60 to-transparent"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop w-full">
