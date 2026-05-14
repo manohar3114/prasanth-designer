@@ -4,6 +4,9 @@ import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 
 export const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
+    const InstagramUrl = "https://www.instagram.com/prasanthdesigners/";
+    const FacebookUrl = "https://www.facebook.com/prasanthdesigner/";
+    const TwitterUrl = "https://twitter.com/prasanthdesigners/";
 
     return (
         <footer className="bg-luxury-black border-t border-luxury-taupe/10 pt-24 pb-12">
@@ -18,9 +21,9 @@ export const Footer: React.FC = () => {
                             Bespoke tailoring and minimal design since 1994. Every piece is a dialogue between tradition and modernity.
                         </p>
                         <div className="flex gap-6 text-luxury-taupe">
-                            <a href="#" className="hover:text-luxury-gold transition-colors"><Instagram size={20} strokeWidth={1} /></a>
-                            <a href="#" className="hover:text-luxury-gold transition-colors"><Facebook size={20} strokeWidth={1} /></a>
-                            <a href="#" className="hover:text-luxury-gold transition-colors"><Twitter size={20} strokeWidth={1} /></a>
+                            <a href={InstagramUrl} target='_blank' rel='noreferrer' className="hover:text-luxury-gold transition-colors"><Instagram size={20} strokeWidth={1} /></a>
+                            <a href={FacebookUrl} target='_blank' rel='noreferrer' className="hover:text-luxury-gold transition-colors"><Facebook size={20} strokeWidth={1} /></a>
+                            <a href={TwitterUrl} target='_blank' rel='noreferrer' className="hover:text-luxury-gold transition-colors"><Twitter size={20} strokeWidth={1} /></a>
                         </div>
                     </div>
 
@@ -60,11 +63,15 @@ export const Footer: React.FC = () => {
                         <div className="space-y-4 font-sans text-[10px] text-luxury-taupe uppercase tracking-widest leading-relaxed">
                             <div className="flex items-center gap-3">
                                 <MapPin size={12} className="text-luxury-gold" />
-                                12 Savile Row, Mayfair, London
+                                Near School Number 1, Iragavaram Colony Road, Tanuku, Andhra Pradesh 534211
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Mail size={12} className="text-luxury-gold" />
+                                <a href="mailto:9Cf0L@example.com" className="hover:text-luxury-gold transition-colors">rajkrupapm@gmail.com</a>
                             </div>
                             <div className="flex items-center gap-3">
                                 <Phone size={12} className="text-luxury-gold" />
-                                +44 20 1234 5678
+                                +91 62819 39129
                             </div>
                         </div>
                     </div>

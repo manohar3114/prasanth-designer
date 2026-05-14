@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Phone, Mail, MessageSquare, MapPin, ExternalLink } from 'lucide-react';
 
 export const Contact: React.FC = () => {
-    const whatsappNumber = "+919876543210"; // Sample number
+    const whatsappNumber = "+916281939129"; // Sample number
     const whatsappMessage = "Hello Prasanth Designers, I would like to inquire about a custom design.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -28,14 +28,14 @@ export const Contact: React.FC = () => {
                 <Phone className="text-luxury-gold shrink-0 mt-1" size={20} strokeWidth={1} />
                 <div>
                   <p className="font-label text-[8px] text-luxury-taupe mb-2">Client Services</p>
-                  <p className="text-xl md:text-2xl text-luxury-cream tracking-wider">+91 98765 43210</p>
+                  <p className="text-xl md:text-2xl text-luxury-cream tracking-wider">+91 62819 39129</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
                 <Mail className="text-luxury-gold shrink-0 mt-1" size={20} strokeWidth={1} />
                 <div>
                   <p className="font-label text-[8px] text-luxury-taupe mb-2">Inquiries</p>
-                  <p className="text-xl md:text-2xl text-luxury-cream tracking-tight">atelier@prasanthdesigners.com</p>
+                  <p className="text-xl md:text-2xl text-luxury-cream tracking-tight">rajkrupapm@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -78,8 +78,8 @@ export const Contact: React.FC = () => {
             <div className="mb-12 border-b border-luxury-taupe/10 pb-12">
               <h3 className="text-4xl text-luxury-gold mb-4">The Heritage Boutique</h3>
               <p className="font-sans text-sm text-luxury-taupe leading-loose max-w-md uppercase tracking-[0.1em]">
-                12 Savile Row, Mayfair, <br />
-                London W1S 3PQ, United Kingdom
+                Near School Num 1, Iragavaram colony road, <br />
+                Tanuku, Andhra Pradesh 534211
               </p>
             </div>
             
