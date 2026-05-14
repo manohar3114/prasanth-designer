@@ -17,8 +17,36 @@ export const Home: React.FC = () => {
         .eq('is_featured', true)
         .limit(3);
 
-      if (!error && data) {
+      if (!error && data && data.length > 0) {
         setFeaturedDesigns(data as Design[]);
+      } else {
+        // Fallback to signature designs from provided screens
+        setFeaturedDesigns([
+          {
+            id: '1',
+            title: 'Silk Zardosi Blouse',
+            category: 'Blouse',
+            image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB-22o4J_svUa-wAUYjpwT5mI9xyTOfUdkzY5M9RXEI1njuBkLrNDmXG9bhs4nCxO0jJjqVAP_rfYkbb0rqWDODe8NGDi1BKk5Hxg6q72gTewlJhBddV3GvpKcNa8qy1JVREIJLOAXTX-xVH21XA9V5aC8AR19dMKBBbiHjyYhnPF0GCOFwMGHvjr4MtXdZ-4b-US8CcayTAsM4WNcVgsIPwbTzC7t36QjxfYJfBA07qpq7K9SEmeXgFRa04_L2pnnfbZ-Y1ukEn-U',
+            is_featured: true,
+            price: 18500
+          },
+          {
+            id: '2',
+            title: 'Ivory Pearl Lehenga',
+            category: 'Lehenga',
+            image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdycAIq3xKg6VYQ62rIHiVRx6dF5HL8LdiNCJCZb98axBbA_ukM9PUzMsuD6H-UiG1ksVOWHIxXMVyrDLEBYu9HiDMAknZN4-MJt65ER3bVqvyRl3HEbAa3V48tC8d4qQCglIeZXaHhbjF1e_iNSBJiT9lzzNunJvnwz9WH5Hp1vphtZXsxWx13I9axoGny8PFs9AkUHOn7oOxhNePNqgl9CVurtLndKz_6h4CX3zB-cmk_270VG5cr5KVRNP2HjVIyTxMMZ3xXnk',
+            is_featured: true,
+            price: 74200
+          },
+          {
+            id: '3',
+            title: 'Structured Linen Kurti',
+            category: 'Kurti',
+            image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB1YFlpxhNgRD3Aw0Xr9E7hzJrJlCyrzsdtqqH1yguvJt2iOQRuLwzRVbwcVfhqnO-w9fQXT2jeAWQ4ruQbuc21YqkSEcQhi7to5W0lXuYUgD2wrghEjkWRmebH63SjEOTKG4W0mzhc9WkgFGKJex7oPXqSwi9LHLMjH2Z-Zss8QK8o_fi8feebGJ7BsovidYgjh8HsRmwFSEvqxJT5-bxvd-_CIq0gzQAtqPWYWLAfKDlZeu6yTiEay1S51_5Tvm7xGCqlKbBZvmw',
+            is_featured: true,
+            price: 12400
+          }
+        ] as any);
       }
       setLoading(false);
     };
@@ -32,14 +60,14 @@ export const Home: React.FC = () => {
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1594931800414-934d400e947e?q=80&w=2670&auto=format&fit=crop"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSVOYxPzt_yS5-vDRss2OFa5TjacBcc6OQg0R6nAoKJJWo4WG9eick56ccmHSP32laCsHoYduH_mQSs2rE9T9v9YwD-6dP4UczXZCY4shg3POf2GqAgWbCtX5NzuILHOK-WN35-Aq_bHcKP1WIXrbwLOreJ9o9-PfqDhvlUxnKazcf8Q-qO6rMT6Lf7xXWBty271G5h-b5avbmLggJoCU6p85HSB-aAHC-yPaKJbC1HWrRt2pDTVWi4n2LkVNl246ErqEAU3Rbsso"
             alt="Luxury Tailoring"
             className="w-full h-full object-cover opacity-30 filter grayscale"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-luxury-black via-luxury-black/60 to-transparent"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-margin-desktop w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop w-full">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -64,8 +92,8 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Featured Designs */}
-      <section className="py-32 bg-luxury-ink">
-        <div className="max-w-7xl mx-auto px-margin-desktop">
+      <section className="py-24 md:py-32 bg-luxury-ink">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="flex justify-between items-end mb-20 border-b border-luxury-taupe/10 pb-10">
             <div>
               <h2 className="text-4xl mb-4">Featured Designs</h2>
@@ -119,8 +147,8 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 border-t border-luxury-taupe/10">
-        <div className="max-w-7xl mx-auto px-margin-desktop">
+      <section className="py-24 md:py-32 border-t border-luxury-taupe/10">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
             <div className="lg:col-span-4">
               <span className="font-label text-luxury-gold mb-6 block">Voices of Elegance</span>

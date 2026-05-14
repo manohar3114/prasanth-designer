@@ -10,6 +10,20 @@ export const Appointments: React.FC = () => {
   const [timeSlot, setTimeSlot] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    if (name === 'fullName' && value.trim().length < 3) {
+      error = 'Full name must be at least 3 characters';
+    } else if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      error = 'Please enter a valid email address';
+    } else if (name === 'phone' && !/^\+?[\d\s-]{10,}$/.test(value)) {
+      error = 'Please enter a valid phone number';
+    }
+    setErrors(prev => ({ ...prev, [name]: error }));
+    return error === '';
+  };
 
   const [formData, setFormData] = useState({
     fullName: user?.full_name || '',
@@ -24,7 +38,19 @@ export const Appointments: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedDate || !timeSlot) return;
+    
+    // Final check
+    const isNameValid = validateField('fullName', formData.fullName);
+    const isEmailValid = validateField('email', formData.email);
+    const isPhoneValid = validateField('phone', formData.phone);
+
+    if (!selectedDate || !timeSlot) {
+      setErrors(prev => ({ ...prev, _booking: 'Please select both a date and time slot.' }));
+      return;
+    }
+    
+    if (!isNameValid || !isEmailValid || !isPhoneValid) return;
+
     setLoading(true);
 
     try {
@@ -50,7 +76,7 @@ export const Appointments: React.FC = () => {
 
   if (submitted) {
     return (
-      <main className="max-w-4xl mx-auto px-margin-desktop py-40">
+      <main className="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-40">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
             <div className="lg:col-span-7">
                 <div className="mb-8 inline-flex items-center justify-center w-16 h-16 rounded-full bg-luxury-gold/20 border border-luxury-gold/30">
@@ -86,7 +112,7 @@ export const Appointments: React.FC = () => {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       <section className="mb-24 flex flex-col md:flex-row gap-20 items-center">
         <div className="w-full md:w-1/2">
           <h1 className="text-display-lg-mobile md:text- display-lg leading-tight mb-8">Book a Boutique Consultation</h1>
@@ -125,7 +151,12 @@ export const Appointments: React.FC = () => {
                 return (
                   <button
                     key={day}
-                    onClick={() => !isDisabled && setSelectedDate(day)}
+                    onClick={() => {
+                      if (!isDisabled) {
+                        setSelectedDate(day);
+                        setErrors(prev => ({ ...prev, _booking: '' }));
+                      }
+                    }}
                     disabled={isDisabled}
                     className={`py-4 font-serif text-lg transition-all duration-300 ${
                       isSelected ? 'bg-luxury-gold text-luxury-black' : 
@@ -147,7 +178,10 @@ export const Appointments: React.FC = () => {
                 {slots.morning.map(s => (
                   <button
                     key={s}
-                    onClick={() => setTimeSlot(s)}
+                    onClick={() => {
+                      setTimeSlot(s);
+                      setErrors(prev => ({ ...prev, _booking: '' }));
+                    }}
                     className={`py-4 font-sans text-[10px] uppercase tracking-widest border transition-all ${
                       timeSlot === s ? 'bg-luxury-gold text-luxury-black border-luxury-gold' : 'border-luxury-taupe/20 text-luxury-taupe hover:border-luxury-gold'
                     }`}
@@ -163,7 +197,10 @@ export const Appointments: React.FC = () => {
                 {slots.afternoon.map(s => (
                   <button
                     key={s}
-                    onClick={() => setTimeSlot(s)}
+                    onClick={() => {
+                        setTimeSlot(s);
+                        setErrors(prev => ({ ...prev, _booking: '' }));
+                    }}
                     className={`py-4 font-sans text-[10px] uppercase tracking-widest border transition-all ${
                       timeSlot === s ? 'bg-luxury-gold text-luxury-black border-luxury-gold' : 'border-luxury-taupe/20 text-luxury-taupe hover:border-luxury-gold'
                     }`}
@@ -185,36 +222,52 @@ export const Appointments: React.FC = () => {
                         <label className="font-label text-[8px] text-luxury-taupe">Full Name</label>
                         <input 
                             type="text" 
-                            className="luxury-input" 
+                            className={`luxury-input ${errors.fullName ? 'border-red-500/50' : ''}`} 
                             required
                             value={formData.fullName}
-                            onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                            onChange={(e) => {
+                                setFormData({...formData, fullName: e.target.value});
+                                validateField('fullName', e.target.value);
+                            }}
                             placeholder="Eleanor Vance" 
                         />
+                        {errors.fullName && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.fullName}</p>}
                     </div>
                     <div className="space-y-2">
                         <label className="font-label text-[8px] text-luxury-taupe">Email Address</label>
                         <input 
                             type="email" 
-                            className="luxury-input" 
+                            className={`luxury-input ${errors.email ? 'border-red-500/50' : ''}`} 
                             required
                             value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            onChange={(e) => {
+                                setFormData({...formData, email: e.target.value});
+                                validateField('email', e.target.value);
+                            }}
                             placeholder="eleanor@vance.com" 
                         />
+                        {errors.email && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.email}</p>}
                     </div>
                     <div className="space-y-2">
                         <label className="font-label text-[8px] text-luxury-taupe">Phone Number</label>
                         <input 
                             type="tel" 
-                            className="luxury-input" 
+                            className={`luxury-input ${errors.phone ? 'border-red-500/50' : ''}`} 
                             required
                             value={formData.phone}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                            onChange={(e) => {
+                                setFormData({...formData, phone: e.target.value});
+                                validateField('phone', e.target.value);
+                            }}
                             placeholder="+44 20 0000 0000" 
                         />
+                        {errors.phone && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.phone}</p>}
                     </div>
                 </div>
+
+                {errors._booking && (
+                  <p className="mt-8 text-[10px] text-red-500 uppercase tracking-widest text-center animate-pulse">{errors._booking}</p>
+                )}
 
                 <button
                     type="submit"

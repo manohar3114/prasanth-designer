@@ -49,7 +49,7 @@ export const Measurements: React.FC = () => {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       <header className="mb-24 flex flex-col md:flex-row justify-between items-end gap-12">
         <div className="max-w-2xl">
           <span className="font-label text-luxury-gold mb-6 block">Precision Bio-Metrics</span>

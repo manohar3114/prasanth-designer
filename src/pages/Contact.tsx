@@ -8,7 +8,7 @@ export const Contact: React.FC = () => {
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       {/* Header Section */}
       <div className="mb-32">
         <span className="font-label text-luxury-gold mb-6 block">Get In Touch</span>

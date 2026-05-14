@@ -17,7 +17,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-luxury-black/90 backdrop-blur-lg border-b border-luxury-taupe/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
         <div className="flex justify-between h-20 items-center">
           <div className="flex-shrink-0">
             <NavLink to="/" className="font-serif text-xl tracking-[0.2em] font-medium text-luxury-gold">

@@ -36,7 +36,7 @@ export const Profile: React.FC = () => {
 
   if (!user) {
     return (
-      <main className="max-w-7xl mx-auto px-margin-desktop py-40 flex flex-col items-center text-center">
+      <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-40 flex flex-col items-center text-center">
         <div className="w-20 h-20 rounded-full bg-luxury-gold/10 flex items-center justify-center text-luxury-gold mb-12">
             <UserIcon size={32} />
         </div>
@@ -55,7 +55,7 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12 border-b border-luxury-taupe/10 pb-16">
         <div className="flex items-center gap-8">
             <div className="w-24 h-24 bg-luxury-gold flex items-center justify-center text-luxury-black text-3xl font-serif">

@@ -10,7 +10,7 @@ export const Cart: React.FC = () => {
 
   if (items.length === 0) {
     return (
-      <main className="max-w-7xl mx-auto px-margin-desktop py-40 text-center">
+      <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-40 text-center">
         <div className="mb-8 flex justify-center text-luxury-gold/20">
           <ShoppingBag size={80} strokeWidth={1} />
         </div>
@@ -29,7 +29,7 @@ export const Cart: React.FC = () => {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       <h1 className="text- display-lg-mobile md:text-5xl mb-20">Your Selection</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">

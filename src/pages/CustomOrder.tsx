@@ -32,6 +32,34 @@ export const CustomOrder: React.FC = () => {
 
   const [files, setFiles] = useState<File[]>([]);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    if (name === 'fullName' && value.trim().length < 3) {
+      error = 'Full name must be at least 3 characters';
+    } else if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      error = 'Please enter a valid email address';
+    } else if (name === 'phone' && !/^\+?[\d\s-]{10,}$/.test(value)) {
+      error = 'Please enter a valid phone number (min 10 digits)';
+    } else if (name === 'address' && value.trim().length < 10) {
+      error = 'Please enter a complete delivery address';
+    }
+    setErrors(prev => ({ ...prev, [name]: error }));
+    return error === '';
+  };
+
+  const validateMeasurement = (name: string, value: string) => {
+    let error = '';
+    const num = parseFloat(value);
+    if (!value) {
+      error = 'Required';
+    } else if (isNaN(num) || num <= 0 || num > 300) {
+      error = 'Invalid range (1-300)';
+    }
+    setErrors(prev => ({ ...prev, [`measurement_${name}`]: error }));
+    return error === '';
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -40,7 +68,16 @@ export const CustomOrder: React.FC = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const isFormValid = 
+      Object.values(errors).every(err => !err) && 
+      formData.fullName && formData.email && formData.phone && formData.address &&
+      Object.values(measurements).every(val => val && !errors[`measurement_${val}`]);
+
+    if (!isFormValid) {
+      alert('Please correct the highlighted errors before submitting.');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -104,7 +141,7 @@ export const CustomOrder: React.FC = () => {
 
   if (submitted) {
     return (
-      <main className="max-w-2xl mx-auto px-margin-desktop py-40 text-center">
+      <main className="max-w-2xl mx-auto px-margin-mobile md:px-margin-desktop py-40 text-center">
         <motion.div
            initial={{ scale: 0.8, opacity: 0 }}
            animate={{ scale: 1, opacity: 1 }}
@@ -135,7 +172,7 @@ export const CustomOrder: React.FC = () => {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-24">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-24">
       <header className="mb-20">
         <h1 className="text-display-lg-mobile md:text-6xl mb-8">Bespoke Commission</h1>
         <p className="font-sans text-xs uppercase tracking-[0.2em] text-luxury-taupe max-w-2xl leading-relaxed">
@@ -155,45 +192,61 @@ export const CustomOrder: React.FC = () => {
                 <label className="font-label text-[8px] text-luxury-taupe">Full Name</label>
                 <input 
                   type="text" 
-                  className="luxury-input" 
+                  className={`luxury-input ${errors.fullName ? 'border-red-500/50' : ''}`} 
                   required
                   value={formData.fullName}
-                  onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, fullName: e.target.value});
+                    validateField('fullName', e.target.value);
+                  }}
                   placeholder="Eleanor Vance" 
                 />
+                {errors.fullName && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.fullName}</p>}
               </div>
               <div className="space-y-2">
                 <label className="font-label text-[8px] text-luxury-taupe">Email Address</label>
                 <input 
                   type="email" 
-                  className="luxury-input" 
+                  className={`luxury-input ${errors.email ? 'border-red-500/50' : ''}`} 
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, email: e.target.value});
+                    validateField('email', e.target.value);
+                  }}
                   placeholder="eleanor@vance.com" 
                 />
+                {errors.email && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.email}</p>}
               </div>
               <div className="space-y-2">
                 <label className="font-label text-[8px] text-luxury-taupe">Phone Number</label>
                 <input 
                   type="tel" 
-                  className="luxury-input" 
+                  className={`luxury-input ${errors.phone ? 'border-red-500/50' : ''}`} 
                   required
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, phone: e.target.value});
+                    validateField('phone', e.target.value);
+                  }}
                   placeholder="+91 00000 00000" 
                 />
+                {errors.phone && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.phone}</p>}
               </div>
               <div className="space-y-2">
                 <label className="font-label text-[8px] text-luxury-taupe">Delivery Address</label>
                 <input 
                   type="text" 
-                  className="luxury-input" 
+                  className={`luxury-input ${errors.address ? 'border-red-500/50' : ''}`} 
                   required
                   value={formData.address}
-                  onChange={(e) => setFormData({...formData, address: e.target.value})}
+                  onChange={(e) => {
+                    setFormData({...formData, address: e.target.value});
+                    validateField('address', e.target.value);
+                  }}
                   placeholder="Your atelier delivery address" 
                 />
+                {errors.address && <p className="text-[8px] text-red-500 uppercase tracking-widest mt-1">{errors.address}</p>}
               </div>
             </div>
           </section>
@@ -245,15 +298,23 @@ export const CustomOrder: React.FC = () => {
             </h3>
             <div className="space-y-10">
               {['Bust', 'Waist', 'Hip', 'Shoulder', 'Sleeve', 'Length'].map((field) => (
-                <div key={field} className="flex items-center justify-between group">
-                  <label className="font-label text-luxury-taupe group-hover:text-luxury-gold transition-colors">{field}</label>
-                  <input 
-                    type="number" 
-                    className="w-24 bg-transparent border-b border-luxury-taupe/20 text-right font-serif text-2xl text-luxury-gold focus:border-luxury-gold outline-none" 
-                    placeholder="00"
-                    value={measurements[field.toLowerCase() as keyof typeof measurements]}
-                    onChange={(e) => setMeasurements({...measurements, [field.toLowerCase()]: e.target.value})}
-                  />
+                <div key={field} className="flex flex-col gap-2 group">
+                  <div className="flex items-center justify-between">
+                    <label className="font-label text-luxury-taupe group-hover:text-luxury-gold transition-colors">{field}</label>
+                    <input 
+                      type="number" 
+                      className={`w-24 bg-transparent border-b ${errors[`measurement_${field.toLowerCase()}`] ? 'border-red-500/50' : 'border-luxury-taupe/20'} text-right font-serif text-2xl text-luxury-gold focus:border-luxury-gold outline-none`} 
+                      placeholder="00"
+                      value={measurements[field.toLowerCase() as keyof typeof measurements]}
+                      onChange={(e) => {
+                        setMeasurements({...measurements, [field.toLowerCase()]: e.target.value});
+                        validateMeasurement(field.toLowerCase(), e.target.value);
+                      }}
+                    />
+                  </div>
+                  {errors[`measurement_${field.toLowerCase()}`] && (
+                    <p className="text-[8px] text-right text-red-500 uppercase tracking-widest">{errors[`measurement_${field.toLowerCase()}`]}</p>
+                  )}
                 </div>
               ))}
             </div>

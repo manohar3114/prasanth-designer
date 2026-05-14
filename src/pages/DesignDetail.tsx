@@ -49,7 +49,7 @@ export const DesignDetail: React.FC = () => {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-margin-desktop py-20">
+    <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-20">
       {/* Breadcrumb */}
       <nav className="mb-12">
         <ul className="flex items-center gap-2 font-label text-luxury-taupe tracking-widest">

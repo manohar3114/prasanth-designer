@@ -12,6 +12,9 @@
   --color-luxury-ink: #110d0b;
   --color-luxury-charcoal: #231f1c;
   --color-luxury-taupe: #9d8e85;
+
+  --spacing-margin-mobile: 1.5rem;
+  --spacing-margin-desktop: 4rem;
 }
 
 body {
