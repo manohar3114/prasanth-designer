@@ -14,6 +14,7 @@ import { Appointments } from './pages/Appointments';
 import { Measurements } from './pages/Measurements';
 import { Contact } from './pages/Contact';
 import { Profile } from './pages/Profile';
+import { Login } from './pages/Login';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/measurements" element={<Measurements />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
             <Footer />
           </div>

@@ -3,10 +3,12 @@ import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, User as UserIcon, ShoppingBag, Calendar, Ruler, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../hooks/useCart';
+import { useAuth } from '../hooks/useAuth';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { items } = useCart();
+  const { user } = useAuth();
 
   const navLinks = [
     { name: 'Collections', href: '/collections' },
@@ -50,8 +52,9 @@ export const Navbar: React.FC = () => {
                   </span>
                 )}
               </Link>
-              <NavLink to="/profile" className="text-luxury-cream/60 hover:text-luxury-gold transition-colors">
+              <NavLink to={user ? "/profile" : "/login"} className="text-luxury-cream/60 hover:text-luxury-gold transition-colors flex items-center gap-2">
                 <UserIcon size={18} strokeWidth={1.5} />
+                {!user && <span className="font-label text-[10px] hidden lg:inline">LOGIN</span>}
               </NavLink>
             </div>
           </div>
@@ -98,11 +101,11 @@ export const Navbar: React.FC = () => {
               ))}
               <div className="pt-8 border-t border-luxury-taupe/10 w-full flex justify-center space-x-8">
                 <NavLink
-                  to="/profile"
+                  to={user ? "/profile" : "/login"}
                   onClick={() => setIsOpen(false)}
                   className="font-sans text-[10px] uppercase tracking-[0.2em] text-luxury-gold"
                 >
-                  Profile
+                  {user ? "PROFILE" : "LOGIN / JOIN"}
                 </NavLink>
               </div>
             </div>

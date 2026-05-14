@@ -44,12 +44,12 @@ export const Profile: React.FC = () => {
         <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-luxury-taupe max-w-sm leading-loose mb-16 px-4">
           Sign in to view your bespoke orders, measurement profile, and scheduled consultations.
         </p>
-        <button 
-            onClick={() => {/* Trigger Supabase Auth UI or Redirect */}} 
-            className="luxury-button px-16"
+        <Link 
+            to="/login"
+            className="luxury-button px-16 inline-block"
         >
             Login to Atelier
-        </button>
+        </Link>
       </main>
     );
   }
