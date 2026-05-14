@@ -60,11 +60,11 @@ export const Footer: React.FC = () => {
                         <div className="space-y-4 font-sans text-[10px] text-luxury-taupe uppercase tracking-widest leading-relaxed">
                             <div className="flex items-center gap-3">
                                 <MapPin size={12} className="text-luxury-gold" />
-                                12 Savile Row, Mayfair, London
+                                Near School Num 1, Iragavaram colony road, Tanuku, Andhra Pradesh 534211
                             </div>
                             <div className="flex items-center gap-3">
                                 <Phone size={12} className="text-luxury-gold" />
-                                +44 20 1234 5678
+                                +91 62819 39129
                             </div>
                         </div>
                     </div>

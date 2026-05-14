@@ -28,14 +28,14 @@ export const Contact: React.FC = () => {
                 <Phone className="text-luxury-gold shrink-0 mt-1" size={20} strokeWidth={1} />
                 <div>
                   <p className="font-label text-[8px] text-luxury-taupe mb-2">Client Services</p>
-                  <p className="text-xl md:text-2xl text-luxury-cream tracking-wider">+91 98765 43210</p>
+                  <p className="text-xl md:text-2xl text-luxury-cream tracking-wider">+91 62819 39129</p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
                 <Mail className="text-luxury-gold shrink-0 mt-1" size={20} strokeWidth={1} />
                 <div>
                   <p className="font-label text-[8px] text-luxury-taupe mb-2">Inquiries</p>
-                  <p className="text-xl md:text-2xl text-luxury-cream tracking-tight">atelier@prasanthdesigners.com</p>
+                  <p className="text-xl md:text-2xl text-luxury-cream tracking-tight">rajkrupapm@gmail.com</p>
                 </div>
               </div>
             </div>
